@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+    <link rel="stylesheet" href="style.css" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="./images/favicon.png"
+    />
+    <title>Calc</title>
+  </head>
+  <body>
+    <div class="calculator-container">
+      <div class="header-section">
+        <h3>calc</h3>
+        <div class="theme-section">
+          <p>THEME</p>
+          <div class="theme-numbers">
+            <p>1</p>
+            <p>2</p>
+            <p>3</p>
+          </div>
+          <div class="toggler-button" onclick="toggleTheme()">
+            <div class="theme-button"></div>
+          </div>
+        </div>
+      </div>
+      <div class="result-section">
+        <div class="prev">0</div>
+        <div class="result">0</div>
+      </div>
+      <div class="calculator-keys">
+        <div class="key seven" onclick="addToResult(7)">7</div>
+        <div class="key eight" onclick="addToResult(8)">8</div>
+        <div class="key nine" onclick="addToResult(9)">9</div>
+        <div class="key del" onclick="removeFromRes()">DEL</div>
+        <div class="key four" onclick="addToResult(4)">4</div>
+        <div class="key five" onclick="addToResult(5)">5</div>
+        <div class="key six" onclick="addToResult(6)">6</div>
+        <div class="key plus" onclick="calRes('+')">+</div>
+        <div class="key one" onclick="addToResult(1)">1</div>
+        <div class="key two" onclick="addToResult(2)">2</div>
+        <div class="key three" onclick="addToResult(3)">3</div>
+        <div class="key minus" onclick="calRes('-')">-</div>
+        <div class="key dot" onclick="addDotToRes()">.</div>
+        <div class="key zero" onclick="addToResult(0)">0</div>
+        <div class="key slash" onclick="calRes('/')">/</div>
+        <div class="key multiply" onclick="calRes('x')">x</div>
+        <div class="key reset" onclick="resetResult()">RESET</div>
+        <div class="key equal" onclick="calRes('=')">=</div>
+      </div>
+    </div>
+
+    <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by
+      <a href="https://sameemanasrin.com" target="_blank">Sameema Nasrin</a>.
+    </div>
+  </body>
+</html>
+
+<script>
+  var result = document.getElementsByClassName("result")[0];
+  var prev = document.getElementsByClassName("prev")[0];
+  let position = 1;
+  var prevResult = 0;
+  var operation = "";
+
+  function addToResult(num) {
+    if (result.innerHTML == 0 && result.innerHTML.indexOf(".") === -1)
+      result.innerHTML = num;
+    else if (result.innerHTML == "Infinity") result.innerHTML = num;
+    else result.innerHTML += num;
+  }
+
+  function removeFromRes() {
+    if (result.innerHTML == "Infinity") result.innerHTML = 0;
+    else {
+      result.innerHTML = result.innerHTML.slice(0, -1);
+      if (result.innerHTML === "") {
+        result.innerHTML = 0;
+      }
+    }
+  }
+
+  function calRes(op) {
+    const currentResult = parseFloat(result.innerHTML);
+
+    switch (operation) {
+      case "":
+        prevResult = currentResult;
+        break;
+      case "+":
+        prevResult += currentResult;
+        break;
+      case "-":
+        prevResult -= currentResult;
+        break;
+      case "x":
+        prevResult *= currentResult;
+        break;
+      case "/":
+        prevResult /= currentResult;
+        break;
+    }
+
+    if (op === "=") {
+      result.innerHTML = prevResult;
+      prev.innerHTML = "=";
+      operation = "";
+    } else {
+      prev.innerHTML = `${prevResult} ${op}`;
+      result.innerHTML = 0;
+      operation = op;
+    }
+  }
+
+  function resetResult() {
+    result.innerHTML = 0;
+    prevResult = 0;
+    prev.innerHTML = prevResult;
+    operation = "";
+  }
+
+  function addDotToRes() {
+    if (result.innerHTML.indexOf(".") === -1) {
+      result.innerHTML += ".";
+    }
+  }
+
+  function toggleTheme() {
+    const button = document.querySelector(".theme-button");
+    button.classList.remove("pos-1", "pos-2", "pos-3");
+    position = position === 3 ? 1 : position + 1;
+    button.classList.add(`pos-${position}`);
+
+    // change themes ----
+    const body = document.body;
+    const attribution = document.getElementsByClassName("attribution")[0];
+    const headerSection = document.getElementsByClassName("header-section")[0];
+    const calculatorKeys =
+      document.getElementsByClassName("calculator-keys")[0];
+    const resultSection = document.getElementsByClassName("result-section")[0];
+    const keys = document.getElementsByClassName("key");
+    const del = document.getElementsByClassName("del")[0];
+    const reset = document.getElementsByClassName("reset")[0];
+    const equal = document.getElementsByClassName("equal")[0];
+    const result = document.getElementsByClassName("result")[0];
+    const prev = document.getElementsByClassName("prev")[0];
+    const themeButton = document.getElementsByClassName("theme-button")[0];
+    const togglerButton = document.getElementsByClassName("toggler-button")[0];
+    const footerLinks = document.querySelectorAll(".attribution a");
+    switch (position) {
+      case 1:
+        body.style.backgroundColor = "var(--theme-1-main-background)";
+        attribution.style.color = "var(--theme-1-white)";
+        headerSection.style.color = "var(--theme-1-white)";
+        calculatorKeys.style.backgroundColor =
+          "var(--theme-1-toggle-background-keypad-background)";
+        resultSection.style.color = "var(--theme-1-white)";
+        resultSection.style.backgroundColor =
+          "var(--theme-1-screen-background)";
+        for (let i = 0; i < keys.length; i++) {
+          keys[i].style.backgroundColor = "var(--theme-1-key-background-nums)";
+          keys[i].style.boxShadow =
+            "0px 3px 1px var(--theme-1-key-shadow-nums)";
+          keys[i].style.color = "var(--theme-1-dark-grayish-blue)";
+        }
+        del.style.backgroundColor = "var(--theme-1-key-background-reset-del)";
+        del.style.color = "var(--theme-1-white)";
+        del.style.boxShadow = "0px 3px 1px var(--theme-1-key-shadow-reset-del)";
+        reset.style.backgroundColor = "var(--theme-1-key-background-reset-del)";
+        reset.style.color = "var(--theme-1-white)";
+        reset.style.boxShadow =
+          "0px 3px 1px var(--theme-1-key-shadow-reset-del)";
+        equal.style.backgroundColor = "var(--theme-1-key-background-equal)";
+        equal.style.color = "var(--theme-1-white)";
+        equal.style.boxShadow = "0px 3px 1px var(--theme-1-key-shadow-equal)";
+        result.style.color = "var(--theme-1-white)";
+        prev.style.color = "var(--theme-1-white)";
+        for (let i = 0; i < footerLinks.length; i++) {
+          footerLinks[i].style.color = "var(--theme-1-white)";
+        }
+
+        themeButton.style.backgroundColor =
+          "var(--theme-1-key-background-equal)";
+        togglerButton.style.backgroundColor =
+          "var(--theme-1-toggle-background-keypad-background)";
+
+        break;
+      case 2:
+        body.style.backgroundColor = "var(--theme-2-main-background)";
+        attribution.style.color = "var(--theme-2-dark-grayish-yellow)";
+        headerSection.style.color = "var(--theme-2-dark-grayish-yellow)";
+        calculatorKeys.style.backgroundColor =
+          "var(--theme-2-toggle-background-keypad-background)";
+        resultSection.style.color = "var(--theme-2-white)";
+        resultSection.style.backgroundColor =
+          "var(--theme-2-screen-background)";
+        for (let i = 0; i < keys.length; i++) {
+          keys[i].style.color = "var(--theme-2-dark-grayish-blue)";
+          keys[i].style.backgroundColor = "var(--theme-2-key-background-nums)";
+          keys[i].style.boxShadow =
+            "0px 3px 1px var(--theme-2-key-shadow-nums)";
+        }
+        del.style.backgroundColor = "var(--theme-2-key-background-reset-del)";
+        del.style.color = "var(--theme-2-white)";
+        del.style.boxShadow = "0px 3px 1px var(--theme-2-key-shadow-reset-del)";
+        reset.style.backgroundColor = "var(--theme-2-key-background-reset-del)";
+        reset.style.color = "var(--theme-2-white)";
+        reset.style.boxShadow =
+          "0px 3px 1px var(--theme-2-key-shadow-reset-del)";
+        equal.style.backgroundColor = "var(--theme-2-key-background-equal)";
+        equal.style.color = "var(--theme-2-white)";
+        equal.style.boxShadow = "0px 3px 1px var(--theme-2-key-shadow-equal)";
+        result.style.color = "var(--theme-2-dark-grayish-yellow)";
+        prev.style.color = "var(--theme-2-dark-grayish-yellow)";
+        for (let i = 0; i < footerLinks.length; i++) {
+          footerLinks[i].style.color = "var(--theme-2-key-background-equal)";
+        }
+
+        themeButton.style.backgroundColor =
+          "var(--theme-2-key-background-equal)";
+        togglerButton.style.backgroundColor =
+          "var(--theme-2-toggle-background-keypad-background)";
+
+        break;
+      case 3:
+        body.style.backgroundColor = "var(--theme-3-main-background)";
+        attribution.style.color = "var(--theme-3-white)";
+        headerSection.style.color = "var(--theme-3-yellow)";
+        calculatorKeys.style.backgroundColor =
+          "var(--theme-3-toggle-background-keypad-background)";
+        resultSection.style.color = "var(--theme-2-white)";
+        resultSection.style.backgroundColor =
+          "var(--theme-3-screen-background)";
+        for (let i = 0; i < keys.length; i++) {
+          keys[i].style.backgroundColor = "var(--theme-3-key-background-nums)";
+          keys[i].style.boxShadow =
+            "0px 3px 1px var(--theme-3-key-shadow-nums)";
+          keys[i].style.color = "var(--theme-3-dark-grayish-blue)";
+        }
+        del.style.backgroundColor = "var(--theme-3-key-background-reset-del)";
+        del.style.color = "var(--theme-3-white)";
+        del.style.boxShadow = "0px 3px 1px var(--theme-3-key-shadow-reset-del)";
+        reset.style.backgroundColor = "var(--theme-3-key-background-reset-del)";
+        reset.style.color = "var(--theme-3-white)";
+        reset.style.boxShadow =
+          "0px 3px 1px var(--theme-3-key-shadow-reset-del)";
+        equal.style.backgroundColor = "var(--theme-3-key-background-equal)";
+        equal.style.color = "var(--theme-3-dark-blue)";
+        equal.style.boxShadow = "0px 3px 1px var(--theme-3-key-shadow-equal)";
+        result.style.color = "var(--theme-3-yellow)";
+        prev.style.color = "var(--theme-3-yellow)";
+        for (let i = 0; i < footerLinks.length; i++) {
+          footerLinks[i].style.color = "var(--theme-3-key-background-equal)";
+        }
+
+        themeButton.style.backgroundColor =
+          "var(--theme-3-key-background-equal)";
+        togglerButton.style.backgroundColor =
+          "var(--theme-3-toggle-background-keypad-background)";
+
+        break;
+    }
+  }
+</script>

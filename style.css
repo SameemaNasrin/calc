@@ -1,0 +1,271 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=League+Spartan:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap");
+
+* {
+  font-family: "League Spartan", sans-serif;
+  font-optical-sizing: auto;
+  /* font-weight: <weight>; */
+  font-style: normal;
+
+  /* Colors */
+  /* Theme 1 */
+
+  /* Backgrounds */
+
+  --theme-1-main-background: hsl(222, 26%, 31%);
+  --theme-1-toggle-background-keypad-background: hsl(223, 31%, 20%);
+  --theme-1-screen-background: hsl(224, 36%, 15%);
+
+  /* Keys */
+
+  --theme-1-key-background-reset-del: hsl(225, 21%, 49%);
+  --theme-1-key-shadow-reset-del: hsl(224, 28%, 35%);
+
+  --theme-1-key-background-equal: hsl(6, 63%, 50%);
+  --theme-1-key-shadow-equal: hsl(6, 70%, 34%);
+
+  --theme-1-key-background-nums: hsl(30, 25%, 89%);
+  --theme-1-key-shadow-nums: hsl(28, 16%, 65%);
+
+  /* Text */
+
+  --theme-1-dark-grayish-blue: hsl(221, 14%, 31%);
+  --theme-1-white: hsl(0, 0%, 100%);
+
+  /* Theme 2 */
+
+  /* Backgrounds */
+
+  --theme-2-main-background: hsl(0, 0%, 90%);
+  --theme-2-toggle-background-keypad-background: hsl(0, 5%, 81%);
+  --theme-2-screen-background: hsl(0, 0%, 93%);
+
+  /* Keys */
+
+  --theme-2-key-background-reset-del: hsl(185, 42%, 37%);
+  --theme-2-key-shadow-reset-del: hsl(185, 58%, 25%);
+
+  --theme-2-key-background-equal: hsl(25, 98%, 40%);
+  --theme-2-key-shadow-equal: hsl(25, 99%, 27%);
+
+  --theme-2-key-background-nums: hsl(45, 7%, 89%);
+  --theme-2-key-shadow-nums: hsl(35, 11%, 61%);
+
+  /* Text */
+
+  --theme-2-dark-grayish-yellow: hsl(60, 10%, 19%);
+  --theme-2-white: hsl(0, 0%, 100%);
+
+  /* Theme 3 */
+
+  /* Backgrounds */
+
+  --theme-3-main-background: hsl(268, 75%, 9%);
+  --theme-3-toggle-background-keypad-background: hsl(268, 71%, 12%);
+  --theme-3-screen-background: hsl(268, 71%, 12%);
+
+  /* Keys */
+
+  --theme-3-key-background-reset-del: hsl(281, 89%, 26%);
+  --theme-3-key-shadow-reset-del: hsl(285, 91%, 52%);
+
+  --theme-3-key-background-equal: hsl(176, 100%, 44%);
+  --theme-3-key-shadow-equal: hsl(177, 92%, 70%);
+
+  --theme-3-key-background-nums: hsl(268, 47%, 21%);
+  --theme-3-key-shadow-nums: hsl(290, 70%, 36%);
+
+  /* Text */
+
+  --theme-3-yellow: hsl(52, 100%, 62%);
+  --theme-3-dark-blue: hsl(198, 20%, 13%);
+  --theme-3-white: hsl(0, 0%, 100%);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--theme-1-main-background);
+}
+
+.attribution {
+  font-size: 11px;
+  text-align: center;
+  color: var(--theme-1-white);
+}
+.attribution a {
+  color: var(--theme-1-white);
+}
+
+.calculator-container {
+  width: fit-content;
+  padding: 2vh 2vw;
+}
+
+.header-section {
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  color: var(--theme-1-white);
+}
+
+.result-section {
+  padding: 2vh;
+  background-color: var(--theme-1-screen-background);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: flex-end;
+  color: var(--theme-1-white);
+}
+
+.prev {
+  font-size: 0.8rem;
+  opacity: 0.5;
+}
+
+.result {
+  margin-top: 1vh;
+  font-size: 2rem;
+  overflow: hidden;
+  max-width: 24vw;
+}
+
+.calculator-keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 1vw;
+  margin-top: 1vw;
+  border-radius: 8px;
+  background-color: var(--theme-1-toggle-background-keypad-background);
+}
+
+.key {
+  font-size: 1.5rem;
+  font-weight: 800;
+  padding: 2vh 1.5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1.5vh 0.5vw;
+  border-radius: 8px;
+  background-color: var(--theme-1-key-background-nums);
+  box-shadow: 0px 3px 1px var(--theme-1-key-shadow-nums);
+  color: var(--theme-1-dark-grayish-blue);
+}
+
+.key:hover {
+  cursor: pointer;
+  filter: brightness(1.2);
+}
+
+.key:active {
+  opacity: 0.6;
+}
+
+.reset {
+  grid-column: 1 / span 2;
+  font-size: 1rem;
+  background-color: var(--theme-1-key-background-reset-del);
+  box-shadow: 0px 3px 1px var(--theme-1-key-shadow-reset-del);
+  color: var(--theme-1-white);
+}
+
+.del {
+  font-size: 1rem;
+  background-color: var(--theme-1-key-background-reset-del);
+  box-shadow: 0px 3px 1px var(--theme-1-key-shadow-reset-del);
+  color: var(--theme-1-white);
+}
+
+.equal {
+  grid-column: 3 / span 2;
+  background-color: var(--theme-1-key-background-equal);
+  box-shadow: 0px 3px 1px var(--theme-1-key-shadow-equal);
+  color: var(--theme-1-white);
+}
+
+.header-section > h3 {
+  font-size: 1.5rem;
+  position: relative;
+  bottom: -1vh;
+}
+
+.theme-section {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  justify-content: end;
+  position: relative;
+}
+
+.theme-section > p {
+  font-size: 0.6rem;
+  position: relative;
+  bottom: -1vh;
+}
+
+.toggler-button {
+  margin-left: 1.5vw;
+  position: relative;
+  width: 50px;
+  height: 15px;
+  background-color: var(--theme-1-toggle-background-keypad-background);
+  border-radius: 15px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.theme-button {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: var(--theme-1-key-background-equal);
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%) translateX(3px);
+  transition: transform 0.3s ease;
+}
+
+.theme-button.pos-1 {
+  transform: translateY(-50%) translateX(3px);
+}
+
+.theme-button.pos-2 {
+  transform: translateY(-50%) translateX(20px);
+}
+
+.theme-button.pos-3 {
+  transform: translateY(-50%) translateX(37px);
+}
+
+.theme-numbers {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.6rem;
+  position: absolute;
+  top: -7px;
+}
+
+.theme-numbers > p {
+  padding: 0 6px;
+}
+
+@media screen and (max-width: 375px) {
+  .calculator-container {
+    min-width: 80vw;
+  }
+
+  .result {
+    max-width: 80vw;
+  }
+}
